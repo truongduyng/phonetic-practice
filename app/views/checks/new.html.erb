@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <%= form_for @check, remote: true do |form| %>
+      <div class="col-sm-6 col-md-6">
+        <h3>Question</h3>
+        <p><%= @check.question %></p>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <h3>Your phonetic translate answer</h3>
+        <%= form.text_area :answer, { rows: 5, required: true, autofocus: true } %>
+      </div>
+      <p style="text-align: center; padding-top: 20px; clear: both;">
+        <%= form.button "Check", class: "btn btn-primary"  %>
+      </p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h3>Score</h3>
+      <p id="result"></p>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h3>Righ answer</h3>
+      <p id="right_ans"></p>
+    </div>
+  </div>
+</div>

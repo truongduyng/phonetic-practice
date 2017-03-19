@@ -1,0 +1,9 @@
+<%
+  notice = if @check.result
+      'Congratulations!'
+    else
+      'Oops! You are wrong somewhere.'
+    end
+%>
+$('#result').html('<%= html_escape(notice) %>');
+$('#right_ans').html('<%= html_escape(@check.right_answer) %>')
