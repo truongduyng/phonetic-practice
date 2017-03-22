@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class Check < ActiveType::Object
   attribute :question, :string
   attribute :answer, :string
@@ -10,7 +8,7 @@ class Check < ActiveType::Object
   before_save :sanitize_input
 
   def result
-    question.split(' ').map(&:singularize).each do |q|
+    question.split(' ').each do |q|
       word = Word.find_by_representation(q) || find_in_cambridge_dict(q)
       self.right_answer += word.phonetic + ' '
     end
@@ -21,15 +19,19 @@ class Check < ActiveType::Object
   private
 
   def sanitize_input
-    self.question = question.downcase.gsub(/[^a-z_ ]/, '').squish
+    self.question = question.downcase.tr('’', '-').gsub(/[^a-z_ -]/, '').squish
     self.answer   = answer.downcase.squish
   end
 
   def find_in_cambridge_dict(query)
-    doc  = Nokogiri::HTML(open("http://dictionary.cambridge.org/dictionary/english/#{query}"))
+    doc  = Nokogiri::HTML(HTTParty.get("http://dictionary.cambridge.org/dictionary/english/#{query}"))
     ipas = doc.css('span[pron-region="US"] span.ipa')
     # self.us_sound_link = doc.css('span[pron-region="US"] span.sound.us')
-    return query if ipas.empty?
-    Word.create!(representation: query, phonetic: ipas.first.content.delete('.'))
+    if ipas.empty?
+      doc = Nokogiri::HTML(HTTParty.get("http://dict.laban.vn/find?type=1&query=#{query}"))
+      ipas = doc.css('div.world span.color-black')
+      return Word.new(phonetic: '') if ipas.empty?
+    end
+    Word.create!(representation: query.tr('-', '’'), phonetic: ipas.first.content.gsub(%r{^\/|\/$|\.}, ''))
   end
 end

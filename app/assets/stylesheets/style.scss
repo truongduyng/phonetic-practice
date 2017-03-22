@@ -4,6 +4,32 @@ body {
   padding-top: 70px;
 }
 
+.center {
+  text-align: center;
+}
+
+table.phonetic_keyboard,
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.icon-link {
+  font-size: 20px;
+}
+
+.home {
+  h2 {
+    text-align: center;
+  }
+  p {
+    text-align: justify;
+  }
+}
+
 #check_answer {
   border-radius: 2px;
   border-color: gray;
@@ -12,5 +38,16 @@ body {
 
 #result {
   color: red;
-  font-size: 20px;
+}
+
+#result,
+#right_ans {
+  text-align: justify;
+}
+
+#checking_loading {
+  display: none;
+  p {
+    text-align: center;
+  }
 }

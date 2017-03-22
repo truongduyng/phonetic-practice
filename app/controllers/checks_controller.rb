@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class ChecksController < ApplicationController
   def new
     build_check
@@ -10,12 +12,11 @@ class ChecksController < ApplicationController
 
   private
 
-  def build_check
-    @check ||= Check.new(params[:check] || {})
+  def check_params
+    params[:check] ? params.require(:check).permit(:question, :answer) : {}
   end
 
-  def question
-    @doc ||= Nokogiri::HTML(open("http://livelifehappy.com/page/#{rand(100)}/"))
-    @doc.css('article div.entry-content p:nth-child(2)')[rand(4)].content
+  def build_check
+    @check ||= Check.new(check_params || {})
   end
 end
