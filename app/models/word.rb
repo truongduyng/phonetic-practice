@@ -8,6 +8,6 @@ class Word < ActiveRecord::Base
   private
 
   def santinize
-    phonetic.tr('t̬', 't').tr('ɚ', 'ǝr')
+    phonetic.tr('t̬ɚɝ', 'tǝrɜ')
   end
 end
