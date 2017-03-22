@@ -32,6 +32,6 @@ class Check < ActiveType::Object
       ipas = doc.css('div.world span.color-black')
       return Word.new(phonetic: '') if ipas.empty?
     end
-    Word.create!(representation: query.tr('-', '’'), phonetic: ipas.first.content.gsub(%r{^\/|\/$|\.}, ''))
+    Word.create!(representation: query.tr('-', '’'), phonetic: ipas.first.content)
   end
 end
