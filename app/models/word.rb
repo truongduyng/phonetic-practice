@@ -1,6 +1,4 @@
 class Word < ActiveRecord::Base
-  include ApplicationHelper
-
   validates :representation, :phonetic, presence: true
 
   before_save :santinize

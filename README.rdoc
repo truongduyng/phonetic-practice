@@ -1,8 +1,0 @@
-== README
-
-### To-do list
-
-* Get question from http://livelifehappy.com/ asynchronous
-* Create a background job to get 1000 common words's phonetic from cambridge dictionary for database
-* Highlight results
-* click to search in Cambridge Dictionary

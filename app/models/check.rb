@@ -27,10 +27,10 @@ class Check < ActiveType::Object
     doc  = Nokogiri::HTML(HTTParty.get("http://dictionary.cambridge.org/dictionary/english/#{query}"))
     ipas = doc.css('span[pron-region="US"] span.ipa')
     # self.us_sound_link = doc.css('span[pron-region="US"] span.sound.us')
-    if ipas.empty?
+    if ipas.empty? || ipas.first.content.empty?
       doc = Nokogiri::HTML(HTTParty.get("http://dict.laban.vn/find?type=1&query=#{query}"))
       ipas = doc.css('div.world span.color-black')
-      return Word.new(phonetic: '') if ipas.empty?
+      return Word.new(phonetic: '') if ipas.empty? || ipas.first.content.empty?
     end
     Word.create!(representation: query.tr('-', '’'), phonetic: ipas.first.content)
   end
