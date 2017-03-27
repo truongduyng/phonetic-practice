@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   get_question();
 
   $('#refresh_question').click(function(e) {
