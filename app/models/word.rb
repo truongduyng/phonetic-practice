@@ -6,7 +6,7 @@ class Word < ActiveRecord::Base
   private
 
   def santinize
-    self.phonetic = phonetic.tr('t̬ɝ', 'tɜ').gsub('ɚ', 'ǝr') \
-                            .gsub(%r{/.\[\]}, '')
+    self.phonetic = phonetic.tr('t̬', 't').tr('ɝ', 'ɜr').gsub('ɚ', 'ǝr') \
+                            .gsub(%r{[/.\[\]]}, '')
   end
 end

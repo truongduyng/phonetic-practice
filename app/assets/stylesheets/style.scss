@@ -38,15 +38,22 @@ td {
   border-radius: 2px;
   border-color: gray;
   width: 100%;
+  font-size: 18px;
 }
 
 #result {
-  color: red;
+  &.wrong {
+    color: red;
+  }
+  &.right {
+    color: green;
+  }
 }
 
 #result,
 #right_ans {
   text-align: justify;
+  font-size: 18px;
 }
 
 .checking_loading {
