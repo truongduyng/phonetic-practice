@@ -54,6 +54,12 @@ td {
 #right_ans {
   text-align: justify;
   font-size: 18px;
+  line-height: 33px;
+  span.highlighted {
+    background-color: red;
+    color: white;
+    padding: 5px;
+  }
 }
 
 .checking_loading {

@@ -7,13 +7,18 @@ class Check < ActiveType::Object
   validates :question, :answer, presence: true
   before_save :sanitize_input
 
-  def result
+  def errors_array_index
     question.split(' ').each do |q|
       word = Word.find_by_representation(q) || find_in_cambridge_dict(q)
       self.right_answer += word.phonetic + ' '
     end
     self.right_answer.strip!
-    self.right_answer == answer
+    errors_index = []
+    answer_splits = answer.split(' ')
+    self.right_answer.split(' ').each_with_index do |rw_word, i|
+      errors_index << i if !answer_splits[i] || rw_word != answer_splits[i]
+    end
+    errors_index
   end
 
   private

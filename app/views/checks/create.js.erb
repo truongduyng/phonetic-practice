@@ -1,5 +1,18 @@
-<% check_result = @check.result %>
+<% check_result = @check.errors_array_index %>
+
 $('#result').removeClass();
-$('#result').addClass('<%= check_result ? 'right' : 'wrong' %>');
-$('#result').html('<%= html_escape(check_result ? "Congratulations! You're right." : "Oops! You are wrong somewhere.") %>');
-$('#right_ans').html('<%= html_escape(@check.right_answer) %>')
+$('#result').addClass('<%= check_result.empty? ? 'right' : 'wrong' %>');
+$('#result').html('<%= html_escape(check_result.empty? ? "Congratulations! You're right." : "Oops! You are wrong somewhere.") %>');
+
+right_answer = '<%= @check.right_answer %>';
+errors_index = <%= check_result %>;
+right_answer_html = ''
+$.each(right_answer.split(" "), function(index, value){
+  if (errors_index.indexOf(index) > -1) {
+    right_answer_html += "<span class='highlighted'>" + value + '</span> ';
+  }
+  else {
+    right_answer_html += '<span>' + value + ' </span> ';
+  }
+})
+$('#right_ans').html(right_answer_html);
