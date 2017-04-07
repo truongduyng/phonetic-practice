@@ -30,8 +30,7 @@ class Check < ActiveType::Object
 
   def find_in_cambridge_dict(query)
     doc  = Nokogiri::HTML(HTTParty.get("http://dictionary.cambridge.org/dictionary/english/#{query}"))
-    ipas = doc.css('span[pron-region="US"] span.ipa')
-    # self.us_sound_link = doc.css('span[pron-region="US"] span.sound.us')
+    ipas = doc.css('div.di-body').try(:first).try(:css, 'span[pron-region="US"] span.ipa')
     if ipas.empty? || ipas.first.content.empty?
       doc = Nokogiri::HTML(HTTParty.get("http://dict.laban.vn/find?type=1&query=#{query}"))
       ipas = doc.css('div.world span.color-black')
