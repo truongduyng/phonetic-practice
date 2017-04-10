@@ -31,10 +31,10 @@ class Check < ActiveType::Object
   def find_in_cambridge_dict(query)
     doc  = Nokogiri::HTML(HTTParty.get("http://dictionary.cambridge.org/dictionary/english/#{query}"))
     ipas = doc.css('div.di-body').try(:first).try(:css, 'span[pron-region="US"] span.ipa')
-    if ipas.empty? || ipas.first.content.empty?
+    if ipas.blank? || ipas.first.content.blank?
       doc = Nokogiri::HTML(HTTParty.get("http://dict.laban.vn/find?type=1&query=#{query}"))
       ipas = doc.css('div.world span.color-black')
-      return Word.new(phonetic: '') if ipas.empty? || ipas.first.content.empty?
+      return Word.new(phonetic: '') if ipas.blank? || ipas.first.content.blank?
     end
     Word.create!(representation: query.tr('-', '’'), phonetic: ipas.first.content)
   end

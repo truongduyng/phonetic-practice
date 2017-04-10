@@ -1,8 +1,8 @@
 <% check_result = @check.errors_array_index %>
 
 $('#result').removeClass();
-$('#result').addClass('<%= check_result.empty? ? 'right' : 'wrong' %>');
-$('#result').html('<%= html_escape(check_result.empty? ? "Congratulations! You're right." : "Oops! You are wrong somewhere.") %>');
+$('#result').addClass('<%= check_result.blank? ? 'right' : 'wrong' %>');
+$('#result').html('<%= html_escape(check_result.blank? ? "Congratulations! You're right." : "Oops! You are wrong somewhere.") %>');
 
 right_answer = '<%= @check.right_answer %>';
 errors_index = <%= check_result %>;

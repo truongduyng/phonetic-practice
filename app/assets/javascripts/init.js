@@ -22,7 +22,7 @@ document.addEventListener("turbolinks:load", function() {
 })
 
 function standardized_ans(ans) {
-  ipa_list = ["ˈ", ",", "ɑː", "aɪ", "aʊ", "ɔː", "ɔɪ", "ʊ", "oʊ", "e", "eɪ", "æ", "ɪ", "iː", "uː", "ʌ", "ə", "ɜ:", "p", "b", "f", "v", "k", "ɡ", "θ", "ð", "s", "z", "∫", "ʒ", "t", "d", "t∫", "dʒ", "j", "m", "n", "ŋ", "w", "r", "h", "l"];
+  ipa_list = ["ˈ", ",", "ɑː", "aɪ", "aʊ", "ɔː", "ɔɪ", "ʊ", "oʊ", "e", "eɪ", "æ", "ɪ", "iː", "uː", "ʌ", "ə", "ɜː", "p", "b", "f", "v", "k", "ɡ", "θ", "ð", "s", "z", "∫", "ʒ", "t", "d", "t∫", "dʒ", "j", "m", "n", "ŋ", "w", "r", "h", "l"];
   ipa_keys = ["'", "ˌ", "a:", "ai", "au", "o:", "oy", "uw", "ou", "e", "ei", "ea", "I", "i:", "u:", "^", "ow", "3:", "p", "b", "f", "v", "k", "ɡ", "th", "dd", "s", "z", "sx", "3y", "t", "d", "tsx", "d3y", "j", "m", "n", "ny", "w", "r", "h", "l"];
   sanitized_ans = ans;
   for (var i = ipa_keys.length - 1; i >= 0; i--) {
