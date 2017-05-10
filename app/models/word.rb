@@ -1,6 +1,6 @@
 class Word < ApplicationRecord
   validates :representation, :phonetic, presence: true
-
+  validates :representation, :phonetic, uniqueness: true
   before_save :santinize
 
   private

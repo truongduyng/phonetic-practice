@@ -9,7 +9,7 @@ class Check < ActiveType::Object
 
   def errors_array_index
     question.split(' ').each do |q|
-      word = Word.find_by_representation(q) || find_in_cambridge_dict(q)
+      word = Word.find_by_representation(q) || find_in_cambridge_dict(q.tr('’', '-'))
       self.right_answer += word.phonetic + ' '
     end
     self.right_answer.strip!
@@ -24,7 +24,7 @@ class Check < ActiveType::Object
   private
 
   def sanitize_input
-    self.question = question.downcase.tr('’', '-').gsub(/[^a-z_ -]/, '').squish
+    self.question = question.downcase.gsub(/[^a-z_ -]/, '').squish
     self.answer   = answer.downcase.squish
   end
 
